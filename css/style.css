@@ -1,0 +1,352 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f8fc;
+    color: #333;
+}
+
+/* HEADER */
+
+.header {
+    background: #0d6efd;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.header nav {
+    display: flex;
+    gap: 25px;
+}
+
+.header nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.header nav a:hover {
+    text-decoration: underline;
+}
+
+
+/* HERO */
+
+.hero {
+    height: 550px;
+
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.55),
+            rgba(255, 255, 255, 0.55)
+        ),
+        url("../images/healthcare-bg.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    padding-left: 8%;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    color: #0d6efd;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 19px;
+    margin-bottom: 30px;
+}
+
+
+/* BUTTON */
+
+.btn,
+button {
+    display: inline-block;
+    background: #0d6efd;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.btn:hover,
+button:hover {
+    background: #084298;
+}
+
+
+/* SECTION */
+
+.section {
+    padding: 50px 7%;
+    text-align: center;
+}
+
+.section h2 {
+    color: #0d6efd;
+    margin-bottom: 30px;
+}
+
+
+/* FLEXBOX */
+
+.feature-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+
+/* CARD */
+
+.card {
+    background: white;
+    width: 280px;
+    padding: 30px 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px #d2d2d2;
+}
+
+.card h3 {
+    color: #0d6efd;
+    margin: 12px 0;
+}
+
+.icon {
+    font-size: 40px;
+}
+
+
+/* FOOTER */
+
+footer {
+    background: #0d6efd;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+
+/* FORM */
+
+.form-container {
+    width: 420px;
+    max-width: 90%;
+    margin: 60px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px #ccc;
+}
+
+.form-container h2 {
+    color: #0d6efd;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.form-container label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 7px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-container button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+
+/* DASHBOARD */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+}
+
+
+/* SIDEBAR */
+
+.sidebar {
+    background: #0d6efd;
+    color: white;
+    padding: 25px 15px;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 13px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+}
+
+.sidebar a:hover {
+    background: #084298;
+}
+
+
+/* MAIN */
+
+.main {
+    padding: 35px;
+}
+
+.main h1 {
+    color: #0d6efd;
+    margin-bottom: 10px;
+}
+
+
+/* DASHBOARD CARDS */
+
+.dashboard-cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.dashboard-card {
+    background: white;
+    width: 230px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px #ccc;
+}
+
+.dashboard-card h3 {
+    color: #0d6efd;
+    margin-bottom: 10px;
+}
+
+.dashboard-card h2 {
+    font-size: 32px;
+}
+
+
+/* DOCTOR GRID */
+
+.doctor-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(230px, 1fr));
+
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.doctor-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px #ccc;
+}
+
+.doctor-card h3 {
+    color: #0d6efd;
+    margin-bottom: 12px;
+}
+
+.doctor-card p {
+    margin: 8px 0;
+}
+
+
+/* TABLE */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    background: white;
+}
+
+th,
+td {
+    padding: 13px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background: #0d6efd;
+    color: white;
+}
+
+
+/* STATUS */
+
+.status {
+    font-weight: bold;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+
+    .header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    table {
+        font-size: 13px;
+    }
+}

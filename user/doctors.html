@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Doctors</title>
+
+    <link rel="stylesheet"
+          href="../css/style.css">
+
+</head>
+
+
+<body>
+
+<div class="dashboard">
+
+
+    <aside class="sidebar">
+
+        <h2>HealthCare+</h2>
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="doctors.html">
+            Doctors
+        </a>
+
+        <a href="book.html">
+            Book Appointment
+        </a>
+
+        <a href="appointments.html">
+            My Appointments
+        </a>
+
+        <a href="#" onclick="logout()">
+            Logout
+        </a>
+
+    </aside>
+
+
+    <main class="main">
+
+        <h1>Available Doctors</h1>
+
+        <div
+            id="doctorList"
+            class="doctor-grid">
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="../js/user.js"></script>
+
+
+<script>
+
+let doctors =
+    JSON.parse(
+        localStorage.getItem("doctors")
+    ) || [];
+
+
+let doctorList =
+    document.getElementById(
+        "doctorList"
+    );
+
+
+if (doctors.length === 0) {
+
+    doctorList.innerHTML =
+        "<p>No doctors available.</p>";
+
+}
+
+
+doctors.forEach(
+    function(doctor) {
+
+        doctorList.innerHTML += `
+
+            <div class="doctor-card">
+
+                <h3>
+                    ${doctor.name}
+                </h3>
+
+                <p>
+                    <b>Specialization:</b>
+                    ${doctor.specialization}
+                </p>
+
+                <p>
+                    <b>Experience:</b>
+                    ${doctor.experience}
+                </p>
+
+                <br>
+
+                <a
+                    href="book.html"
+                    class="btn">
+
+                    Book Appointment
+
+                </a>
+
+            </div>
+
+        `;
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

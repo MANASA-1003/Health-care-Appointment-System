@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>All Appointments</title>
+
+    <link rel="stylesheet"
+          href="../css/style.css">
+
+</head>
+
+
+<body>
+
+<div class="dashboard">
+
+
+    <aside class="sidebar">
+
+        <h2>Admin Panel</h2>
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="doctors.html">
+            Manage Doctors
+        </a>
+
+        <a href="appointments.html">
+            Appointments
+        </a>
+
+        <a href="#" onclick="logout()">
+            Logout
+        </a>
+
+    </aside>
+
+
+    <main class="main">
+
+        <h1>All Appointments</h1>
+
+        <div id="appointmentList"></div>
+
+    </main>
+
+</div>
+
+
+<script src="../js/admin.js"></script>
+
+
+<script>
+
+function displayAppointments() {
+
+    let appointments =
+        JSON.parse(
+            localStorage.getItem("appointments")
+        ) || [];
+
+
+    let list =
+        document.getElementById(
+            "appointmentList"
+        );
+
+
+    if (appointments.length === 0) {
+
+        list.innerHTML =
+            "<p>No appointments found.</p>";
+
+        return;
+    }
+
+
+    let html = `
+
+        <table>
+
+            <tr>
+
+                <th>Patient</th>
+
+                <th>Email</th>
+
+                <th>Doctor</th>
+
+                <th>Date</th>
+
+                <th>Time</th>
+
+                <th>Status</th>
+
+            </tr>
+
+    `;
+
+
+    appointments.forEach(
+        function(appointment) {
+
+            html += `
+
+                <tr>
+
+                    <td>
+                        ${appointment.patient}
+                    </td>
+
+                    <td>
+                        ${appointment.email}
+                    </td>
+
+                    <td>
+                        ${appointment.doctor}
+                    </td>
+
+                    <td>
+                        ${appointment.date}
+                    </td>
+
+                    <td>
+                        ${appointment.time}
+                    </td>
+
+                    <td>
+                        ${appointment.status}
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    html += "</table>";
+
+
+    list.innerHTML = html;
+
+}
+
+
+displayAppointments();
+
+</script>
+
+</body>
+
+</html>

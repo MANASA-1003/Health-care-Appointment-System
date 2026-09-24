@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Book Appointment</title>
+
+    <link rel="stylesheet"
+          href="../css/style.css">
+
+</head>
+
+
+<body>
+
+<div class="dashboard">
+
+
+    <aside class="sidebar">
+
+        <h2>HealthCare+</h2>
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="doctors.html">
+            Doctors
+        </a>
+
+        <a href="book.html">
+            Book Appointment
+        </a>
+
+        <a href="appointments.html">
+            My Appointments
+        </a>
+
+        <a href="#" onclick="logout()">
+            Logout
+        </a>
+
+    </aside>
+
+
+    <main class="main">
+
+
+        <div class="form-container">
+
+            <h2>Book Appointment</h2>
+
+
+            <form id="appointmentForm">
+
+
+                <label>Select Doctor</label>
+
+                <select
+                    id="doctor"
+                    required>
+
+                    <option value="">
+                        Select Doctor
+                    </option>
+
+                </select>
+
+
+                <label>Select Date</label>
+
+                <input
+                    type="date"
+                    id="date"
+                    required
+                >
+
+
+                <label>Select Time</label>
+
+                <input
+                    type="time"
+                    id="time"
+                    required
+                >
+
+
+                <button type="submit">
+
+                    Book Appointment
+
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="../js/user.js"></script>
+
+
+<script>
+
+// Load doctors
+
+let doctors =
+    JSON.parse(
+        localStorage.getItem("doctors")
+    ) || [];
+
+
+let doctorSelect =
+    document.getElementById(
+        "doctor"
+    );
+
+
+doctors.forEach(
+    function(doctor) {
+
+        let option =
+            document.createElement(
+                "option"
+            );
+
+
+        option.value =
+            doctor.name;
+
+
+        option.textContent =
+            doctor.name +
+            " - " +
+            doctor.specialization;
+
+
+        doctorSelect.appendChild(
+            option
+        );
+
+    }
+);
+
+
+
+// Book appointment
+
+document
+.getElementById("appointmentForm")
+.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        let appointments =
+            JSON.parse(
+                localStorage.getItem(
+                    "appointments"
+                )
+            ) || [];
+
+
+        let appointment = {
+
+            id: Date.now(),
+
+            patient:
+                currentUser.name,
+
+            email:
+                currentUser.email,
+
+            doctor:
+                document
+                .getElementById("doctor")
+                .value,
+
+            date:
+                document
+                .getElementById("date")
+                .value,
+
+            time:
+                document
+                .getElementById("time")
+                .value,
+
+            status: "Pending"
+
+        };
+
+
+        appointments.push(
+            appointment
+        );
+
+
+        localStorage.setItem(
+            "appointments",
+            JSON.stringify(
+                appointments
+            )
+        );
+
+
+        alert(
+            "Appointment booked successfully!"
+        );
+
+
+        window.location.href =
+            "appointments.html";
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

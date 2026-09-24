@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Doctors</title>
+
+    <link rel="stylesheet"
+          href="../css/style.css">
+
+</head>
+
+
+<body>
+
+<div class="dashboard">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <h2>Admin Panel</h2>
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="doctors.html">
+            Manage Doctors
+        </a>
+
+        <a href="appointments.html">
+            Appointments
+        </a>
+
+        <a href="#" onclick="logout()">
+            Logout
+        </a>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <h1>Manage Doctors</h1>
+
+
+        <!-- ADD DOCTOR -->
+
+        <div class="form-container"
+             style="width:100%; margin:30px 0;">
+
+            <h2>Add Doctor</h2>
+
+
+            <form id="doctorForm">
+
+                <label>Doctor Name</label>
+
+                <input
+                    type="text"
+                    id="doctorName"
+                    placeholder="Enter doctor name"
+                    required
+                >
+
+
+                <label>Specialization</label>
+
+                <input
+                    type="text"
+                    id="specialization"
+                    placeholder="Example: Cardiologist"
+                    required
+                >
+
+
+                <label>Experience</label>
+
+                <input
+                    type="text"
+                    id="experience"
+                    placeholder="Example: 10 years"
+                    required
+                >
+
+
+                <button type="submit">
+                    Add Doctor
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <h2>Doctor List</h2>
+
+
+        <div
+            id="doctorList"
+            class="doctor-grid">
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="../js/admin.js"></script>
+
+
+<script>
+
+// Get doctors
+
+function getDoctors() {
+
+    return JSON.parse(
+        localStorage.getItem("doctors")
+    ) || [];
+
+}
+
+
+// Display doctors
+
+function displayDoctors() {
+
+    let doctors = getDoctors();
+
+    let list =
+        document.getElementById("doctorList");
+
+
+    list.innerHTML = "";
+
+
+    if (doctors.length === 0) {
+
+        list.innerHTML =
+            "<p>No doctors available.</p>";
+
+        return;
+    }
+
+
+    doctors.forEach(function(doctor) {
+
+        list.innerHTML += `
+
+            <div class="doctor-card">
+
+                <h3>
+                    ${doctor.name}
+                </h3>
+
+                <p>
+                    <b>Specialization:</b>
+                    ${doctor.specialization}
+                </p>
+
+                <p>
+                    <b>Experience:</b>
+                    ${doctor.experience}
+                </p>
+
+                <br>
+
+                <button
+                    onclick="deleteDoctor(${doctor.id})">
+
+                    Delete
+
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+// Add doctor
+
+document
+.getElementById("doctorForm")
+.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        let doctors = getDoctors();
+
+
+        let newDoctor = {
+
+            id: Date.now(),
+
+            name:
+                document
+                .getElementById("doctorName")
+                .value
+                .trim(),
+
+            specialization:
+                document
+                .getElementById("specialization")
+                .value
+                .trim(),
+
+            experience:
+                document
+                .getElementById("experience")
+                .value
+                .trim()
+
+        };
+
+
+        doctors.push(newDoctor);
+
+
+        localStorage.setItem(
+            "doctors",
+            JSON.stringify(doctors)
+        );
+
+
+        alert(
+            "Doctor added successfully!"
+        );
+
+
+        this.reset();
+
+
+        displayDoctors();
+
+    }
+);
+
+
+// Delete doctor
+
+function deleteDoctor(id) {
+
+    let doctors = getDoctors();
+
+
+    doctors =
+        doctors.filter(
+            doctor => doctor.id !== id
+        );
+
+
+    localStorage.setItem(
+        "doctors",
+        JSON.stringify(doctors)
+    );
+
+
+    alert("Doctor deleted!");
+
+
+    displayDoctors();
+
+}
+
+
+// Show doctors
+
+displayDoctors();
+
+</script>
+
+</body>
+
+</html>
