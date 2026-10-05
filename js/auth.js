@@ -1,212 +1,87 @@
-// ========================================
-// SIGNUP
-// ========================================
+// ================= SIGNUP =================
 
-let signupForm =
-    document.getElementById("signupForm");
+function signup() {
 
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-if (signupForm) {
+    if (name === "" || email === "" || password === "") {
+        alert("Please fill all fields.");
+        return;
+    }
 
-    signupForm.addEventListener(
-        "submit",
-        function(event) {
+    let users = JSON.parse(localStorage.getItem("users")) || [];
 
-            event.preventDefault();
+    const existingUser = users.find(user => user.email === email);
 
+    if (existingUser) {
+        alert("Email already registered.");
+        return;
+    }
 
-            let name =
-                document.getElementById("name").value.trim();
+    users.push({
+        name: name,
+        email: email,
+        password: password
+    });
 
-            let email =
-                document.getElementById("email").value.trim();
+    localStorage.setItem("users", JSON.stringify(users));
 
-            let password =
-                document.getElementById("password").value;
-
-            let confirmPassword =
-                document.getElementById("confirmPassword").value;
-
-
-            // Check password
-
-            if (password !== confirmPassword) {
-
-                alert("Passwords do not match!");
-
-                return;
-            }
-
-
-            // Get existing users
-
-            let users =
-                JSON.parse(
-                    localStorage.getItem("users")
-                ) || [];
-
-
-            // Check existing email
-
-            let existingUser =
-                users.find(
-                    user => user.email === email
-                );
-
-
-            if (existingUser) {
-
-                alert(
-                    "This email is already registered!"
-                );
-
-                return;
-            }
-
-
-            // Create user
-
-            let newUser = {
-
-                name: name,
-
-                email: email,
-
-                password: password,
-
-                role: "user"
-            };
-
-
-            // Add user
-
-            users.push(newUser);
-
-
-            // Save to Local Storage
-
-            localStorage.setItem(
-                "users",
-                JSON.stringify(users)
-            );
-
-
-            alert(
-                "Signup successful! Please login."
-            );
-
-
-            window.location.href =
-                "login.html";
-        }
-    );
+    alert("Signup successful! Please login.");
+    window.location.href = "login.html";
 }
 
 
+// ================= LOGIN =================
 
-// ========================================
-// LOGIN
-// ========================================
+function login() {
 
-let loginForm =
-    document.getElementById("loginForm");
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
+    // Admin login
+    if (email === "admin@gmail.com" && password === "admin123") {
 
-if (loginForm) {
+        localStorage.setItem("loggedInUser", JSON.stringify({
+            name: "Administrator",
+            email: email,
+            role: "admin"
+        }));
 
-    loginForm.addEventListener(
-        "submit",
-        function(event) {
+        window.location.href = "admin/dashboard.html";
+        return;
+    }
 
-            event.preventDefault();
+    // User login
+    const users = JSON.parse(localStorage.getItem("users")) || [];
 
-
-            let email =
-                document
-                .getElementById("loginEmail")
-                .value
-                .trim();
-
-
-            let password =
-                document
-                .getElementById("loginPassword")
-                .value;
-
-
-            // ====================================
-            // ADMIN LOGIN
-            // ====================================
-
-            if (
-                email === "admin@gmail.com" &&
-                password === "admin123"
-            ) {
-
-                let admin = {
-
-                    name: "Administrator",
-
-                    email: email,
-
-                    role: "admin"
-                };
-
-
-                localStorage.setItem(
-                    "loggedInUser",
-                    JSON.stringify(admin)
-                );
-
-
-                window.location.href =
-                    "admin/dashboard.html";
-
-
-                return;
-            }
-
-
-            // ====================================
-            // USER LOGIN
-            // ====================================
-
-            let users =
-                JSON.parse(
-                    localStorage.getItem("users")
-                ) || [];
-
-
-            let user =
-                users.find(
-                    user =>
-                        user.email === email &&
-                        user.password === password
-                );
-
-
-            if (!user) {
-
-                alert(
-                    "Invalid email or password!"
-                );
-
-                return;
-            }
-
-
-            // Save logged-in user
-
-            localStorage.setItem(
-                "loggedInUser",
-                JSON.stringify(user)
-            );
-
-
-            // Redirect to User Module
-
-            window.location.href =
-                "user/dashboard.html";
-        }
+    const user = users.find(
+        u => u.email === email && u.password === password
     );
+
+    if (!user) {
+        alert("Invalid email or password.");
+        return;
+    }
+
+    localStorage.setItem("loggedInUser", JSON.stringify({
+        name: user.name,
+        email: user.email,
+        role: "user"
+    }));
+
+    window.location.href = "user/dashboard.html";
+}
+
+
+// ================= LOGOUT =================
+
+function logout() {
+
+    localStorage.removeItem("loggedInUser");
+
+    alert("You have been logged out.");
+
+    window.location.href = "../index.html";
 }

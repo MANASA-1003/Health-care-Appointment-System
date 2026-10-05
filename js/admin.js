@@ -1,130 +1,254 @@
-// ======================================
-// ADMIN AUTHENTICATION
-// ======================================
+// ================= ADMIN CHECK =================
 
-let loggedInUser =
-    JSON.parse(
-        localStorage.getItem("loggedInUser")
-    );
+function checkAdmin() {
 
+    const user =
+        JSON.parse(localStorage.getItem("loggedInUser"));
 
-if (
-    !loggedInUser ||
-    loggedInUser.role !== "admin"
-) {
+    if (!user || user.role !== "admin") {
+        window.location.href = "../login.html";
+        return false;
+    }
 
-    window.location.href =
-        "../login.html";
+    return true;
 }
 
 
+// ================= ADMIN APPOINTMENTS =================
 
-// ======================================
-// DEFAULT DOCTORS
-// ======================================
+function loadAdminAppointments() {
 
-let doctors =
-    JSON.parse(
-        localStorage.getItem("doctors")
-    );
+    if (!checkAdmin()) return;
 
+    const appointments =
+        JSON.parse(localStorage.getItem("appointments")) || [];
 
-if (!doctors) {
+    const tableBody =
+        document.getElementById("adminAppointmentList");
 
-    doctors = [
+    if (!tableBody) return;
 
-        {
-            id: 1,
-            name: "Dr. Ravi Kumar",
-            specialization: "Cardiologist",
-            experience: "10 years"
-        },
+    tableBody.innerHTML = "";
 
-        {
-            id: 2,
-            name: "Dr. Priya Sharma",
-            specialization: "Dermatologist",
-            experience: "7 years"
-        },
+    if (appointments.length === 0) {
 
-        {
-            id: 3,
-            name: "Dr. Arjun Rao",
-            specialization: "Pediatrician",
-            experience: "8 years"
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="8">
+                    No appointments available.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    appointments.forEach(appointment => {
+
+        let statusClass = "pending";
+
+        if (appointment.status === "Accepted") {
+            statusClass = "accepted";
         }
 
-    ];
+        if (appointment.status === "Rejected") {
+            statusClass = "rejected";
+        }
 
+        tableBody.innerHTML += `
 
-    localStorage.setItem(
-        "doctors",
-        JSON.stringify(doctors)
-    );
+            <tr>
+
+                <td>${appointment.patientName}</td>
+
+                <td>${appointment.patientEmail}</td>
+
+                <td>${appointment.doctor}</td>
+
+                <td>${appointment.date}</td>
+
+                <td>${appointment.time}</td>
+
+                <td>${appointment.reason}</td>
+
+                <td>
+                    <span class="status ${statusClass}">
+                        ${appointment.status}
+                    </span>
+                </td>
+
+                <td>
+
+                    ${
+                        appointment.status === "Pending"
+                        ? `
+                            <button
+                                class="accept-btn"
+                                onclick="updateAppointment(${appointment.id}, 'Accepted')">
+                                Accept
+                            </button>
+
+                            <button
+                                class="reject-btn"
+                                onclick="updateAppointment(${appointment.id}, 'Rejected')">
+                                Reject
+                            </button>
+                          `
+                        : `
+                            <button
+                                class="delete-btn"
+                                onclick="deleteAppointment(${appointment.id})">
+                                Delete
+                            </button>
+                          `
+                    }
+
+                </td>
+
+            </tr>
+
+        `;
+    });
 }
 
 
+// ================= ACCEPT / REJECT =================
 
-// ======================================
-// DASHBOARD COUNTS
-// ======================================
-
-let doctorCount =
-    document.getElementById(
-        "doctorCount"
-    );
-
-
-if (doctorCount) {
-
-    let users =
-        JSON.parse(
-            localStorage.getItem("users")
-        ) || [];
-
+function updateAppointment(id, newStatus) {
 
     let appointments =
-        JSON.parse(
-            localStorage.getItem("appointments")
-        ) || [];
+        JSON.parse(localStorage.getItem("appointments")) || [];
 
+    const appointment =
+        appointments.find(a => a.id === id);
 
-    let doctors =
-        JSON.parse(
-            localStorage.getItem("doctors")
-        ) || [];
+    if (!appointment) return;
 
+    appointment.status = newStatus;
 
-    doctorCount.innerText =
-        doctors.length;
+    localStorage.setItem(
+        "appointments",
+        JSON.stringify(appointments)
+    );
 
+    alert("Appointment " + newStatus + ".");
 
-    document.getElementById(
-        "userCount"
-    ).innerText =
-        users.length;
-
-
-    document.getElementById(
-        "appointmentCount"
-    ).innerText =
-        appointments.length;
-
+    loadAdminAppointments();
 }
 
 
+// ================= DELETE =================
 
-// ======================================
-// LOGOUT
-// ======================================
+function deleteAppointment(id) {
 
-function logout() {
+    let appointments =
+        JSON.parse(localStorage.getItem("appointments")) || [];
 
-    localStorage.removeItem(
-        "loggedInUser"
+    appointments = appointments.filter(
+        appointment => appointment.id !== id
     );
 
+    localStorage.setItem(
+        "appointments",
+        JSON.stringify(appointments)
+    );
 
-    window.location.href =
-        "../login.html";
+    loadAdminAppointments();
+}
+
+
+// ================= ADMIN FEEDBACK =================
+
+function loadAdminFeedback() {
+
+    if (!checkAdmin()) return;
+
+    const feedbacks =
+        JSON.parse(localStorage.getItem("feedbacks")) || [];
+
+    const tableBody =
+        document.getElementById("feedbackList");
+
+    if (!tableBody) return;
+
+    tableBody.innerHTML = "";
+
+    if (feedbacks.length === 0) {
+
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="5">
+                    No feedback received.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    feedbacks.forEach(feedback => {
+
+        tableBody.innerHTML += `
+
+            <tr>
+
+                <td>${feedback.name}</td>
+
+                <td>${feedback.email}</td>
+
+                <td>
+                    <span class="rating">
+                        ${"★".repeat(Number(feedback.rating))}
+                    </span>
+                </td>
+
+                <td>${feedback.message}</td>
+
+                <td>${feedback.date}</td>
+
+            </tr>
+
+        `;
+    });
+}
+
+
+// ================= ADMIN DASHBOARD COUNTS =================
+
+function loadAdminDashboard() {
+
+    if (!checkAdmin()) return;
+
+    const appointments =
+        JSON.parse(localStorage.getItem("appointments")) || [];
+
+    const users =
+        JSON.parse(localStorage.getItem("users")) || [];
+
+    const feedbacks =
+        JSON.parse(localStorage.getItem("feedbacks")) || [];
+
+    const totalAppointments =
+        document.getElementById("totalAppointments");
+
+    const totalUsers =
+        document.getElementById("totalUsers");
+
+    const totalFeedback =
+        document.getElementById("totalFeedback");
+
+    if (totalAppointments) {
+        totalAppointments.textContent =
+            appointments.length;
+    }
+
+    if (totalUsers) {
+        totalUsers.textContent =
+            users.length;
+    }
+
+    if (totalFeedback) {
+        totalFeedback.textContent =
+            feedbacks.length;
+    }
 }

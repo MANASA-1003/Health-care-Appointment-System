@@ -5,14 +5,14 @@
 
     <meta charset="UTF-8">
 
-    <title>Manage Appointments</title>
+    <title>Customer Feedback</title>
 
     <link rel="stylesheet"
           href="../css/style.css">
 
 </head>
 
-<body onload="loadAdminAppointments()">
+<body onload="loadAdminFeedback()">
 
 <div class="dashboard">
 
@@ -46,10 +46,10 @@
 
     <main class="main-content">
 
-        <h1>Manage Appointments</h1>
+        <h1>User Feedback</h1>
 
         <p>
-            Accept or reject patient appointment requests.
+            Feedback submitted by patients.
         </p>
 
 
@@ -61,28 +61,22 @@
 
                     <tr>
 
-                        <th>Patient</th>
+                        <th>Name</th>
 
                         <th>Email</th>
 
-                        <th>Doctor</th>
+                        <th>Rating</th>
+
+                        <th>Feedback</th>
 
                         <th>Date</th>
-
-                        <th>Time</th>
-
-                        <th>Reason</th>
-
-                        <th>Status</th>
-
-                        <th>Action</th>
 
                     </tr>
 
                 </thead>
 
 
-                <tbody id="adminAppointmentList">
+                <tbody id="feedbackList">
 
                 </tbody>
 

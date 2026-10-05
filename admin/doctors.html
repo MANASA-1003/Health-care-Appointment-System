@@ -5,21 +5,17 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Manage Doctors</title>
+    <title>Manage Doctors | HealthCare+</title>
 
-    <link rel="stylesheet"
-          href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
-
 
 <body>
 
 <div class="dashboard">
-
 
     <!-- SIDEBAR -->
 
@@ -28,86 +24,457 @@
         <h2>Admin Panel</h2>
 
         <a href="dashboard.html">
-            Dashboard
+            🏠 Dashboard
         </a>
 
         <a href="doctors.html">
-            Manage Doctors
+            👨‍⚕️ Manage Doctors
         </a>
 
         <a href="appointments.html">
-            Appointments
+            📅 Appointments
         </a>
 
-        <a href="#" onclick="logout()">
-            Logout
+        <a href="feedback.html">
+            ⭐ Feedback
+        </a>
+
+        <a href="../index.html" onclick="logout()">
+            🚪 Logout
         </a>
 
     </aside>
 
 
-    <!-- MAIN -->
+    <!-- MAIN CONTENT -->
 
-    <main class="main">
+    <main class="main-content">
 
-        <h1>Manage Doctors</h1>
+        <div class="doctor-header">
 
+            <div>
 
-        <!-- ADD DOCTOR -->
+                <h1>Manage Doctors</h1>
 
-        <div class="form-container"
-             style="width:100%; margin:30px 0;">
+                <p class="page-subtitle">
+                    Manage healthcare professionals registered in the system.
+                </p>
 
-            <h2>Add Doctor</h2>
-
-
-            <form id="doctorForm">
-
-                <label>Doctor Name</label>
-
-                <input
-                    type="text"
-                    id="doctorName"
-                    placeholder="Enter doctor name"
-                    required
-                >
+            </div>
 
 
-                <label>Specialization</label>
+            <button
+                class="btn add-doctor-btn"
+                onclick="alert('Add Doctor feature can be added here.')">
 
-                <input
-                    type="text"
-                    id="specialization"
-                    placeholder="Example: Cardiologist"
-                    required
-                >
+                + Add New Doctor
 
-
-                <label>Experience</label>
-
-                <input
-                    type="text"
-                    id="experience"
-                    placeholder="Example: 10 years"
-                    required
-                >
-
-
-                <button type="submit">
-                    Add Doctor
-                </button>
-
-            </form>
+            </button>
 
         </div>
 
 
-        <h2>Doctor List</h2>
+        <!-- DOCTOR CARDS -->
+
+        <div class="doctor-grid admin-doctor-grid">
 
 
-        <div
-            id="doctorList"
-            class="doctor-grid">
+            <!-- DOCTOR 1 -->
+
+            <div class="doctor-card admin-doctor-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=400&q=80"
+                    class="doctor-photo"
+                    alt="Dr. Rajesh Kumar">
+
+                <div class="doctor-info">
+
+                    <h3>
+                        Dr. Rajesh Kumar
+                    </h3>
+
+                    <p class="specialization">
+                        Cardiologist
+                    </p>
+
+                    <p>
+                        🎓 MBBS, MD Cardiology
+                    </p>
+
+                    <p>
+                        💼 12 Years Experience
+                    </p>
+
+                    <p class="rating">
+                        ⭐⭐⭐⭐⭐
+                        <span>(4.9)</span>
+                    </p>
+
+                    <p class="availability">
+                        ● Available Today
+                    </p>
+
+                    <p class="fee">
+                        Consultation: ₹500
+                    </p>
+
+
+                    <div class="admin-doctor-buttons">
+
+                        <button
+                            class="edit-doctor"
+                            onclick="editDoctor('Dr. Rajesh Kumar')">
+
+                            ✏️ Edit
+
+                        </button>
+
+                        <button
+                            class="remove-doctor"
+                            onclick="removeDoctor('Dr. Rajesh Kumar')">
+
+                            🗑️ Remove
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DOCTOR 2 -->
+
+            <div class="doctor-card admin-doctor-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=400&q=80"
+                    class="doctor-photo"
+                    alt="Dr. Priya Sharma">
+
+                <div class="doctor-info">
+
+                    <h3>
+                        Dr. Priya Sharma
+                    </h3>
+
+                    <p class="specialization">
+                        General Physician
+                    </p>
+
+                    <p>
+                        🎓 MBBS, MD Medicine
+                    </p>
+
+                    <p>
+                        💼 9 Years Experience
+                    </p>
+
+                    <p class="rating">
+                        ⭐⭐⭐⭐⭐
+                        <span>(4.8)</span>
+                    </p>
+
+                    <p class="availability">
+                        ● Available Today
+                    </p>
+
+                    <p class="fee">
+                        Consultation: ₹400
+                    </p>
+
+
+                    <div class="admin-doctor-buttons">
+
+                        <button
+                            class="edit-doctor"
+                            onclick="editDoctor('Dr. Priya Sharma')">
+
+                            ✏️ Edit
+
+                        </button>
+
+                        <button
+                            class="remove-doctor"
+                            onclick="removeDoctor('Dr. Priya Sharma')">
+
+                            🗑️ Remove
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DOCTOR 3 -->
+
+            <div class="doctor-card admin-doctor-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1618498082410-b4aa22193b38?auto=format&fit=crop&w=400&q=80"
+                    class="doctor-photo"
+                    alt="Dr. Arjun Rao">
+
+                <div class="doctor-info">
+
+                    <h3>
+                        Dr. Arjun Rao
+                    </h3>
+
+                    <p class="specialization">
+                        Dermatologist
+                    </p>
+
+                    <p>
+                        🎓 MBBS, MD Dermatology
+                    </p>
+
+                    <p>
+                        💼 8 Years Experience
+                    </p>
+
+                    <p class="rating">
+                        ⭐⭐⭐⭐☆
+                        <span>(4.7)</span>
+                    </p>
+
+                    <p class="availability">
+                        ● Available Today
+                    </p>
+
+                    <p class="fee">
+                        Consultation: ₹450
+                    </p>
+
+
+                    <div class="admin-doctor-buttons">
+
+                        <button
+                            class="edit-doctor"
+                            onclick="editDoctor('Dr. Arjun Rao')">
+
+                            ✏️ Edit
+
+                        </button>
+
+                        <button
+                            class="remove-doctor"
+                            onclick="removeDoctor('Dr. Arjun Rao')">
+
+                            🗑️ Remove
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DOCTOR 4 -->
+
+            <div class="doctor-card admin-doctor-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=400&q=80"
+                    class="doctor-photo"
+                    alt="Dr. Anjali Reddy">
+
+                <div class="doctor-info">
+
+                    <h3>
+                        Dr. Anjali Reddy
+                    </h3>
+
+                    <p class="specialization">
+                        Pediatrician
+                    </p>
+
+                    <p>
+                        🎓 MBBS, MD Pediatrics
+                    </p>
+
+                    <p>
+                        💼 10 Years Experience
+                    </p>
+
+                    <p class="rating">
+                        ⭐⭐⭐⭐⭐
+                        <span>(4.9)</span>
+                    </p>
+
+                    <p class="availability">
+                        ● Available Today
+                    </p>
+
+                    <p class="fee">
+                        Consultation: ₹500
+                    </p>
+
+
+                    <div class="admin-doctor-buttons">
+
+                        <button
+                            class="edit-doctor"
+                            onclick="editDoctor('Dr. Anjali Reddy')">
+
+                            ✏️ Edit
+
+                        </button>
+
+                        <button
+                            class="remove-doctor"
+                            onclick="removeDoctor('Dr. Anjali Reddy')">
+
+                            🗑️ Remove
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DOCTOR 5 -->
+
+            <div class="doctor-card admin-doctor-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80"
+                    class="doctor-photo"
+                    alt="Dr. Sneha Patel">
+
+                <div class="doctor-info">
+
+                    <h3>
+                        Dr. Sneha Patel
+                    </h3>
+
+                    <p class="specialization">
+                        Gynecologist
+                    </p>
+
+                    <p>
+                        🎓 MBBS, MS Obstetrics
+                    </p>
+
+                    <p>
+                        💼 11 Years Experience
+                    </p>
+
+                    <p class="rating">
+                        ⭐⭐⭐⭐⭐
+                        <span>(4.8)</span>
+                    </p>
+
+                    <p class="availability">
+                        ● Available Today
+                    </p>
+
+                    <p class="fee">
+                        Consultation: ₹550
+                    </p>
+
+
+                    <div class="admin-doctor-buttons">
+
+                        <button
+                            class="edit-doctor"
+                            onclick="editDoctor('Dr. Sneha Patel')">
+
+                            ✏️ Edit
+
+                        </button>
+
+                        <button
+                            class="remove-doctor"
+                            onclick="removeDoctor('Dr. Sneha Patel')">
+
+                            🗑️ Remove
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DOCTOR 6 -->
+
+            <div class="doctor-card admin-doctor-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=400&q=80"
+                    class="doctor-photo"
+                    alt="Dr. Vikram Singh">
+
+                <div class="doctor-info">
+
+                    <h3>
+                        Dr. Vikram Singh
+                    </h3>
+
+                    <p class="specialization">
+                        Orthopedic Specialist
+                    </p>
+
+                    <p>
+                        🎓 MBBS, MS Orthopedics
+                    </p>
+
+                    <p>
+                        💼 14 Years Experience
+                    </p>
+
+                    <p class="rating">
+                        ⭐⭐⭐⭐⭐
+                        <span>(4.9)</span>
+                    </p>
+
+                    <p class="availability">
+                        ● Available Today
+                    </p>
+
+                    <p class="fee">
+                        Consultation: ₹600
+                    </p>
+
+
+                    <div class="admin-doctor-buttons">
+
+                        <button
+                            class="edit-doctor"
+                            onclick="editDoctor('Dr. Vikram Singh')">
+
+                            ✏️ Edit
+
+                        </button>
+
+                        <button
+                            class="remove-doctor"
+                            onclick="removeDoctor('Dr. Vikram Singh')">
+
+                            🗑️ Remove
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
         </div>
 
     </main>
@@ -115,174 +482,40 @@
 </div>
 
 
-<script src="../js/admin.js"></script>
-
+<script src="../js/auth.js"></script>
 
 <script>
 
-// Get doctors
+function editDoctor(name) {
 
-function getDoctors() {
-
-    return JSON.parse(
-        localStorage.getItem("doctors")
-    ) || [];
-
-}
-
-
-// Display doctors
-
-function displayDoctors() {
-
-    let doctors = getDoctors();
-
-    let list =
-        document.getElementById("doctorList");
-
-
-    list.innerHTML = "";
-
-
-    if (doctors.length === 0) {
-
-        list.innerHTML =
-            "<p>No doctors available.</p>";
-
-        return;
-    }
-
-
-    doctors.forEach(function(doctor) {
-
-        list.innerHTML += `
-
-            <div class="doctor-card">
-
-                <h3>
-                    ${doctor.name}
-                </h3>
-
-                <p>
-                    <b>Specialization:</b>
-                    ${doctor.specialization}
-                </p>
-
-                <p>
-                    <b>Experience:</b>
-                    ${doctor.experience}
-                </p>
-
-                <br>
-
-                <button
-                    onclick="deleteDoctor(${doctor.id})">
-
-                    Delete
-
-                </button>
-
-            </div>
-
-        `;
-
-    });
-
-}
-
-
-// Add doctor
-
-document
-.getElementById("doctorForm")
-.addEventListener(
-    "submit",
-    function(event) {
-
-        event.preventDefault();
-
-
-        let doctors = getDoctors();
-
-
-        let newDoctor = {
-
-            id: Date.now(),
-
-            name:
-                document
-                .getElementById("doctorName")
-                .value
-                .trim(),
-
-            specialization:
-                document
-                .getElementById("specialization")
-                .value
-                .trim(),
-
-            experience:
-                document
-                .getElementById("experience")
-                .value
-                .trim()
-
-        };
-
-
-        doctors.push(newDoctor);
-
-
-        localStorage.setItem(
-            "doctors",
-            JSON.stringify(doctors)
-        );
-
-
-        alert(
-            "Doctor added successfully!"
-        );
-
-
-        this.reset();
-
-
-        displayDoctors();
-
-    }
-);
-
-
-// Delete doctor
-
-function deleteDoctor(id) {
-
-    let doctors = getDoctors();
-
-
-    doctors =
-        doctors.filter(
-            doctor => doctor.id !== id
-        );
-
-
-    localStorage.setItem(
-        "doctors",
-        JSON.stringify(doctors)
+    alert(
+        "Edit Doctor\n\n" +
+        "Doctor: " + name +
+        "\n\nEdit functionality can be connected to a doctor form."
     );
 
-
-    alert("Doctor deleted!");
-
-
-    displayDoctors();
-
 }
 
 
-// Show doctors
+function removeDoctor(name) {
 
-displayDoctors();
+    const confirmRemove =
+        confirm(
+            "Are you sure you want to remove " +
+            name +
+            "?"
+        );
+
+    if (confirmRemove) {
+
+        alert(
+            name +
+            " has been removed successfully."
+        );
+
+    }
+
+}
 
 </script>
 

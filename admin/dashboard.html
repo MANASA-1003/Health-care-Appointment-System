@@ -5,9 +5,6 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
     <title>Admin Dashboard</title>
 
     <link rel="stylesheet"
@@ -15,40 +12,39 @@
 
 </head>
 
-
-<body>
+<body onload="loadAdminDashboard()">
 
 <div class="dashboard">
-
-
-    <!-- SIDEBAR -->
 
     <aside class="sidebar">
 
         <h2>Admin Panel</h2>
 
         <a href="dashboard.html">
-            Dashboard
+            🏠 Dashboard
         </a>
 
         <a href="doctors.html">
-            Manage Doctors
+            👨‍⚕️ Manage Doctors
         </a>
 
         <a href="appointments.html">
-            Appointments
+            📅 Appointments
         </a>
 
-        <a href="#" onclick="logout()">
-            Logout
+        <a href="feedback.html">
+            ⭐ Feedback
+        </a>
+
+        <a href="../index.html"
+           onclick="logout()">
+            🚪 Logout
         </a>
 
     </aside>
 
 
-    <!-- MAIN -->
-
-    <main class="main">
+    <main class="main-content">
 
         <h1>Admin Dashboard</h1>
 
@@ -57,41 +53,62 @@
         </p>
 
 
-        <div class="dashboard-cards">
+        <div class="cards">
 
-
-            <div class="dashboard-card">
-
-                <h3>Total Doctors</h3>
-
-                <h2 id="doctorCount">
-                    0
-                </h2>
-
-            </div>
-
-
-            <div class="dashboard-card">
+            <div class="card">
 
                 <h3>Total Users</h3>
 
-                <h2 id="userCount">
+                <p id="totalUsers">
                     0
-                </h2>
+                </p>
 
             </div>
 
 
-            <div class="dashboard-card">
+            <div class="card">
 
                 <h3>Total Appointments</h3>
 
-                <h2 id="appointmentCount">
+                <p id="totalAppointments">
                     0
-                </h2>
+                </p>
 
             </div>
 
+
+            <div class="card">
+
+                <h3>Total Feedback</h3>
+
+                <p id="totalFeedback">
+                    0
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="feedback-box">
+
+            <h3>Admin Responsibilities</h3>
+
+            <p>
+                ✔ Manage doctors
+            </p>
+
+            <p>
+                ✔ Accept or reject appointments
+            </p>
+
+            <p>
+                ✔ View patient appointments
+            </p>
+
+            <p>
+                ✔ View user feedback
+            </p>
 
         </div>
 
@@ -99,6 +116,8 @@
 
 </div>
 
+
+<script src="../js/auth.js"></script>
 
 <script src="../js/admin.js"></script>
 
